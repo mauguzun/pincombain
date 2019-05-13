@@ -166,14 +166,16 @@ namespace PinCombain
                 string[] emailPass = currentAccount.Replace("/data", "").Split(':');
                 if (MakeLogin(emailPass[0], emailPass[1]) == true)
                 {
+                   
                     Console.WriteLine("logined");
-                    pinterestMethods.SetAccountName(emailPass[2]);
+                    
                     pinterestMethods.Driver = driver;
                     pinterestMethods.FillCard();
+                    pinterestMethods.FillName();
 
                     if (pinterestMethods.CreateBoard())
                     {
-                        pinterestMethods.FillName();
+                    
                         File.AppendAllText(DIR + "/"+ "supreproxy.txt", proxy + Environment.NewLine);
                         Console.WriteLine("done");
                         break;
@@ -313,16 +315,21 @@ namespace PinCombain
                 Console.WriteLine("logined");
                 Thread.Sleep(new TimeSpan(0, 0, 5));
                 if (CheckLogin())
-
+                {
                     pinterestMethods.FillCard();
-                pinterestMethods.FillName();
-                pinterestMethods.CreateBoard();
+                    pinterestMethods.FillName();
+                    pinterestMethods.CreateBoard();
 
-                File.Move(currentPath, DIR + @"\" + Path.GetFileName(accountPath));
+                    File.Move(accountPath, DIR + @"\" + Path.GetFileName(accountPath));
+                   
+                    File.AppendAllText(DIR + @"\" + "done.txt", Path.GetFileNameWithoutExtension(accountPath) + ":trance_333" + Environment.NewLine);
+
+                }
+                else
+                {
+                    File.Delete(accountPath);
+                }
                 driver.Quit();
-                File.AppendAllText(DIR + @"\" + "done.txt", Path.GetFileNameWithoutExtension(accountPath) + ":trance_333" + Environment.NewLine);
-
-
 
 
             }

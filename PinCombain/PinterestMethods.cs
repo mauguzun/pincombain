@@ -31,6 +31,7 @@ namespace PinCombain
                 for (int i = 0; i < 50; i++)
                 {
                     Driver.FindElementById("first_name").SendKeys(Keys.Backspace);
+                    Driver.FindElementById("last_name").SendKeys(Keys.Backspace);
                 }
 
 
