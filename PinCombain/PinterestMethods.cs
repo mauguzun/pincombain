@@ -38,6 +38,7 @@ namespace PinCombain
 
 
                 Driver.FindElementById("first_name").SendKeys(new RandomValue().GetString("names.txt"));
+                Driver.FindElementById("last_name").SendKeys(new RandomValue().GetString("names.txt"));
                 Driver.FindElementById("first_name").SendKeys(Keys.Space);
 
                 this.accountName = Driver.FindElementById("username").GetAttribute("value");

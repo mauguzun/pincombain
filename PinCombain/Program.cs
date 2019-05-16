@@ -257,8 +257,13 @@ namespace PinCombain
 
             var dr = GetDriver(false);
 
-            if (File.Exists(DIR + "/__good_acc.txt"))
-                File.Delete(DIR + "/__good_acc.txt");
+
+            foreach(string file in new string[] { "/__good_acc.txt", "/titles.txt" })
+            {
+                if (File.Exists(DIR + file))
+                    File.Delete(DIR + file);
+            }
+         
 
 
             foreach (string line in accounts)
@@ -266,13 +271,19 @@ namespace PinCombain
                 string[] values = line.Split(':');
                 dr.Url = "https://pinterest.com/" + values[2];
 
+
+
                 if (dr.Title.Trim() == "Pinterest")
                 {
+                   
                     File.AppendAllText(DIR + "/__bad_url.txt", "https://pinterest.com/" + values[2] + Environment.NewLine);
                     File.AppendAllText(DIR + "/__bad_acc.txt", line + Environment.NewLine);
+                    Console.WriteLine(line + " emmm... ");
                 }
                 else
                 {
+                    File.AppendAllText(DIR + "/titles.txt", dr.Title.Trim() + ":" + line + Environment.NewLine);
+
                     File.AppendAllText(DIR + "/__good_acc.txt", line + Environment.NewLine);
                     Console.WriteLine(line + " --- ");
                 }
