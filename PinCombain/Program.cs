@@ -58,17 +58,20 @@ namespace PinCombain
                 case "l":
                     ShowAccountIn();
                     break;
+
+
+
+
                 case "b":
                     MakeBoard();
                     break;
-
 
                 case "g":
                     GrabOrMakePost();
                     break;
 
                 case "p":
-                    GrabOrMakePost(false);
+                    MakePost();
                     break;
 
                 case "u":
@@ -84,6 +87,44 @@ namespace PinCombain
 
 
         }
+
+        private static void MakePost()
+        {
+            string proxy = RandomProxy();
+            driver = GetDriver(true, proxy);
+            var res = MakeLogin("denisuminja.k.rasiv.i.jp.enis@gmail.com", "1637trance");
+            if (res)
+            {
+
+              
+
+              
+                PostPin post = new PostPin();
+                post.Driver = driver;
+                post.Start();
+               
+
+            }
+
+        }
+        private static string RandomProxy()
+        {
+            string currentProxy;
+            GetProxy.ProxyReader proxyReader = new GetProxy.ProxyReader();
+            var proxyList = proxyReader.GetList();
+            currentProxy = proxyList[new Random().Next(0, proxyList.Count())];
+
+            try
+            {
+
+                proxyList.Remove(currentProxy);
+                File.WriteAllLines(proxyReader.Path, proxyList.ToArray());
+
+            }
+            catch { };
+            return currentProxy;
+        }
+
 
         private static void ShowAccountIn()
         {
@@ -161,22 +202,22 @@ namespace PinCombain
             {
                 Console.WriteLine(proxy);
                 driver = GetDriver(true, proxy);
-                currentAccount =currentAccount.Replace("data/", "");
-                currentAccount =currentAccount.Replace(".xml", "");
+                currentAccount = currentAccount.Replace("data/", "");
+                currentAccount = currentAccount.Replace(".xml", "");
                 string[] emailPass = currentAccount.Replace("/data", "").Split(':');
                 if (MakeLogin(emailPass[0], emailPass[1]) == true)
                 {
-                   
+
                     Console.WriteLine("logined");
-                    
+
                     pinterestMethods.Driver = driver;
                     pinterestMethods.FillCard();
                     pinterestMethods.FillName();
 
                     if (pinterestMethods.CreateBoard())
                     {
-                    
-                        File.AppendAllText(DIR + "/"+ "supreproxy.txt", proxy + Environment.NewLine);
+
+                        File.AppendAllText(DIR + "/" + "supreproxy.txt", proxy + Environment.NewLine);
                         Console.WriteLine("done");
                         break;
                     }
@@ -195,7 +236,7 @@ namespace PinCombain
                 driver.FindElementById("password").SendKeys(pass);
                 driver.FindElementById("email").SendKeys(email);
 
-               
+
                 driver.FindElementByCssSelector("div[data-test-id='registerFormSubmitButton']").Click();
 
                 Thread.Sleep(new TimeSpan(0, 0, 25));
@@ -209,10 +250,10 @@ namespace PinCombain
             {
                 return false;
             }
-           
 
 
-           
+
+
         }
 
         private static void MakeLogin(string accountPath)
@@ -258,12 +299,12 @@ namespace PinCombain
             var dr = GetDriver(false);
 
 
-            foreach(string file in new string[] { "/__good_acc.txt", "/titles.txt" })
+            foreach (string file in new string[] { "/__good_acc.txt", "/titles.txt" })
             {
                 if (File.Exists(DIR + file))
                     File.Delete(DIR + file);
             }
-         
+
 
 
             foreach (string line in accounts)
@@ -275,7 +316,7 @@ namespace PinCombain
 
                 if (dr.Title.Trim() == "Pinterest")
                 {
-                   
+
                     File.AppendAllText(DIR + "/__bad_url.txt", "https://pinterest.com/" + values[2] + Environment.NewLine);
                     File.AppendAllText(DIR + "/__bad_acc.txt", line + Environment.NewLine);
                     Console.WriteLine(line + " emmm... ");
@@ -332,7 +373,7 @@ namespace PinCombain
                     pinterestMethods.CreateBoard();
 
                     File.Move(accountPath, DIR + @"\" + Path.GetFileName(accountPath));
-                   
+
                     File.AppendAllText(DIR + @"\" + "done.txt", Path.GetFileNameWithoutExtension(accountPath) + ":trance_333" + Environment.NewLine);
 
                 }

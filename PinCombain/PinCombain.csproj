@@ -79,6 +79,7 @@
     <Compile Include="DCookie.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="IStart.cs" />
+    <Compile Include="PostAcc.cs" />
     <Compile Include="PostPin.cs" />
     <Compile Include="MakeGrabber.cs" />
     <Compile Include="Model.cs" />

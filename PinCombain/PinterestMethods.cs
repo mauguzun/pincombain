@@ -147,6 +147,9 @@ namespace PinCombain
             catch (Exception ex) { Console.WriteLine(ex.Message); }
         }
 
+        public void MakePin()
+        { 
+}
         
         public void GrabName()
         {
