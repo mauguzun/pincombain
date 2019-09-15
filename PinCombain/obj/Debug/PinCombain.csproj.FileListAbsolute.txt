@@ -48,3 +48,4 @@ C:\my_work_files\PinCombain\PinCombain\obj\Debug\PinCombain.csproj.CoreCompileIn
 C:\my_work_files\PinCombain\PinCombain\obj\Debug\PinCombain.csproj.CopyComplete
 C:\my_work_files\PinCombain\PinCombain\obj\Debug\PinCombain.exe
 C:\my_work_files\PinCombain\PinCombain\obj\Debug\PinCombain.pdb
+C:\my_work_files\PinCombain\PinCombain\obj\Debug\PinCombain.csprojAssemblyReference.cache

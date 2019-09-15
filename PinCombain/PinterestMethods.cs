@@ -106,7 +106,7 @@ namespace PinCombain
 
                     if (result > 5)
                     {
-                        var button = Driver.FindElementsByCssSelector(".NuxPickerFooter button");
+                        var button = Driver.FindElementsByCssSelector("[data-test-id='nux-picker-done-btn'] button");
                         if (button.Count > 0)
                         {
 

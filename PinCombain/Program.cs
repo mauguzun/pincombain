@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace PinCombain
@@ -15,9 +16,11 @@ namespace PinCombain
     {
         static PinterestMethods pinterestMethods = new PinterestMethods();
         static string DIR = "data";
+        static string LOGINED = "for_grab_account_";
         static string currentPath;
         static string currentAccount = null;
         static ChromeDriver driver;
+
 
         static void Main(string[] args)
         {
@@ -36,7 +39,7 @@ namespace PinCombain
 
             if (answer == null)
             {
-                Console.WriteLine("r/rename  p/post  b/makeboard  l/showAccountIn   u/user g/grab  c/check");
+                Console.WriteLine("r/rename  p/post  b/makeboard  l/showAccountIn   u/user g/grab  c/check  do/doling"   );
                 answer = Console.ReadLine();
             }
             if (answer.Contains("|"))
@@ -59,6 +62,9 @@ namespace PinCombain
                     ShowAccountIn();
                     break;
 
+                case "do":
+                     DoLogin();
+                    break;
 
 
 
@@ -85,6 +91,54 @@ namespace PinCombain
 
             Console.ReadKey();
 
+
+        }
+
+        private static void DoLogin()
+        {
+            string proxy = RandomProxy();
+            do
+            {
+                try
+                {
+                    proxy = RandomProxy();
+                    driver = GetDriver(true);
+                 //   driver = GetDriver(true, proxy);
+                    driver.Url = "https://www.pinterest.com/login/";
+                }
+                catch { }
+              
+     
+                Console.WriteLine("ok? y|n");
+                
+            }
+            while (!Console.ReadLine().Contains("y"));
+
+            //save cookie
+            var xs = driver.Manage().Cookies.GetCookieNamed("_auth");
+            var cookies = driver.Manage().Cookies.AllCookies;
+
+            List<DCookie> listDc = new List<DCookie>();
+            foreach (OpenQA.Selenium.Cookie cookie in cookies)
+            {
+                //_auth=1
+                var dCookie = new DCookie();
+                dCookie.Domain = cookie.Domain;
+                dCookie.Expiry = cookie.Expiry;
+                dCookie.Name = cookie.Name;
+                dCookie.Path = cookie.Path;
+                dCookie.Value = cookie.Value;
+                dCookie.Secure = cookie.Secure;
+
+                listDc.Add(dCookie);
+            }
+            XmlSerializer ser = new XmlSerializer(typeof(List<DCookie>), new XmlRootAttribute("list"));
+
+            using (FileStream fs = new FileStream(DIR + "/"+LOGINED + proxy.Replace(".","_").Replace(":","__") +".xml" , FileMode.Create))
+            {
+                ser.Serialize(fs, listDc);
+            }
+            GrabOrMakePost();
 
         }
 
@@ -168,16 +222,29 @@ namespace PinCombain
         }
         static void GrabOrMakePost(bool grabPin = true)
         {
-            if (currentAccount == null)
-            {
-                var accounts = new ReadXmlAccounts().GetXml(DIR);
-                currentAccount = accounts[0];
-            }
+          
+             var accounts = new ReadXmlAccounts().GetXml(DIR);
+           // string proxy = RandomProxy();
 
+
+            foreach (var acc in accounts)
+            {
+                if (acc.Contains(LOGINED))
+                {
+                    currentAccount = acc;
+                   // proxy = acc.Replace(DIR, "").Replace("\\", "").Replace(LOGINED, "").Replace("__", ":").Replace("_", ".").Replace("xml", ".");
+                    break;
+
+                }
+            }
             driver = GetDriver(false);
+           // driver = GetDriver(false, proxy);
             pinterestMethods.Driver = driver;
 
             MakeLogin(currentAccount);
+
+
+
             if (CheckLogin())
             {
                 IStart gr;
@@ -231,8 +298,7 @@ namespace PinCombain
 
             try
             {
-                driver.Url = "https://www.pinterest.com/login/";
-
+                
                 driver.FindElementById("password").SendKeys(pass);
                 driver.FindElementById("email").SendKeys(email);
 
@@ -258,8 +324,12 @@ namespace PinCombain
 
         private static void MakeLogin(string accountPath)
         {
+
+         
             driver.Url = "http://pinterest.com";
             List<DCookie> dCookie;
+
+           
             using (var reader = new StreamReader(accountPath))
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(List<DCookie>),
@@ -273,7 +343,7 @@ namespace PinCombain
             }
 
             driver.Url = "http://pinterest.com";
-            Console.WriteLine("logined");
+            Console.WriteLine("logined" + CheckLogin());
             Thread.Sleep(new TimeSpan(0, 0, 5));
         }
 
@@ -394,6 +464,8 @@ namespace PinCombain
 
         private static ChromeDriver GetDriver(bool visible = false, string proxy = null)
         {
+
+            
             var driverService = ChromeDriverService.CreateDefaultService();
             driverService.HideCommandPromptWindow = true;
 
@@ -402,8 +474,8 @@ namespace PinCombain
 
             if (!visible)
                 options.AddArguments("headless");
-            if (proxy != null)
-                options.AddArgument($"--proxy-server={proxy}");
+           if (proxy != null)
+             options.AddArgument($"--proxy-server={proxy}");
 
             options.AddArgument("--window-size=1920,4080");
             ChromeDriver driver = new ChromeDriver(driverService, options);

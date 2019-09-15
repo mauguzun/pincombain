@@ -16,7 +16,8 @@ namespace PinCombain
         private List<Domain> _domains;
 
         private string _url = "https://www.pinterest.com/";
-        //private string _url = "https://www.pinterest.com/categories/popular/";
+        private string _urlPopular = "https://www.pinterest.com/categories/popular/";
+        private int _attemp;
 
         private string _domainFile = "domains.txt";
         private string _resultFile = "result.txt";
@@ -98,7 +99,18 @@ namespace PinCombain
             {
                 File.AppendAllLines(this._resultFile, result);
                 Console.WriteLine($"saved {result.Count()}" + Environment.NewLine);
-                Driver.Url = this._url;
+
+                this._attemp++;
+                if (_attemp % 5 ==0)
+                {
+                    Console.WriteLine("popilar");
+                    Driver.Url = this._urlPopular;
+                }
+                else
+                {
+                    Driver.Url = this._url;
+                }
+               
                 PostResult();
 
             }

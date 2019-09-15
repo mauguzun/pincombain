@@ -131,3 +131,4 @@
 [0504/122914.575:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
 [0504/122914.575:ERROR:exception_snapshot_win.cc(98)] thread ID 42420 not found in process
 [0506/090802.490:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\mauguzun\AppData\Local\Temp\scoped_dir99444_30906\Crashpad\reports\6c6ecfad-5243-4aa9-91c2-bcec458ca9c2.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0903/084459.005:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
