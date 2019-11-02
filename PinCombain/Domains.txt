@@ -1,10 +1,2 @@
-﻿http://cars.nl.eu.org
-http://knoxville.nl.eu.org
-http://kissimmee.nl.eu.org
-http://killeen.nl.eu.org
-http://kenosha.nl.eu.org
-http://kennewick.nl.eu.org
-http://lewisville.nl.eu.org
-http://layton.nl.eu.org
-http://laredo.nl.eu.org
-http://mctrance.cf
+﻿http://do.mdotransports.lv
+http://mdotransports.lv

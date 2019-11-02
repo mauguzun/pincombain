@@ -49,3 +49,12 @@ C:\my_work_files\PinCombain\PinCombain\obj\Debug\PinCombain.csproj.CopyComplete
 C:\my_work_files\PinCombain\PinCombain\obj\Debug\PinCombain.exe
 C:\my_work_files\PinCombain\PinCombain\obj\Debug\PinCombain.pdb
 C:\my_work_files\PinCombain\PinCombain\obj\Debug\PinCombain.csprojAssemblyReference.cache
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\EntityFramework.dll
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\EntityFramework.SqlServer.dll
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\System.Data.SQLite.dll
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\System.Data.SQLite.EF6.dll
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\System.Data.SQLite.Linq.dll
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\EntityFramework.xml
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\EntityFramework.SqlServer.xml
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\System.Data.SQLite.xml
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\System.Data.SQLite.dll.config

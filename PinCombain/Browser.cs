@@ -14,9 +14,9 @@ namespace PinCombain
 {
     class Browser
     {
-        private ChromeDriver driver { get; set; }
+        private RemoteWebDriver driver { get; set; }
 
-        public Browser(ChromeDriver driver)
+        public Browser(RemoteWebDriver driver)
         {
             this.driver = driver;
         }

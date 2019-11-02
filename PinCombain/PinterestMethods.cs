@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 
 namespace PinCombain
 {
     public class PinterestMethods
     {
-        public ChromeDriver Driver { get; set; }
+        public RemoteWebDriver Driver { get; set; }
         private string accountName = null;
         private Model model;
         public void SetAccountName(string accName)

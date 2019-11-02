@@ -20,7 +20,7 @@ namespace PinCombain
         private int _attemp;
 
         private string _domainFile = "domains.txt";
-        private string _resultFile = "result.txt";
+        public string resultFile = "result.txt";
 
 
       
@@ -73,12 +73,13 @@ namespace PinCombain
             {
 
 
-                var nodes = Driver.FindElementsByCssSelector(".pinWrapper img");
+                var nodes = Driver.FindElementsByCssSelector("[data-test-id='pinWrapper'] img");
                 foreach (var node in nodes)
                 {
                     string img = node.GetAttribute("src");
                     img = img.Replace("236x", "564x");
                     string text = node.GetAttribute("alt");
+
                     string request = $"?c={this.Base64Encode(text)}*{this.Base64Encode(img.Replace("https://", ""))}";
 
                     if (!result.Contains(request))
@@ -97,7 +98,7 @@ namespace PinCombain
             }
             finally
             {
-                File.AppendAllLines(this._resultFile, result);
+                File.AppendAllLines(this.resultFile, result);
                 Console.WriteLine($"saved {result.Count()}" + Environment.NewLine);
 
                 this._attemp++;
@@ -116,14 +117,14 @@ namespace PinCombain
             }
         }
 
-        private void PostResult()
+        public void PostResult()
         {
             try
             {
                 int newP = 0;
                 int existP = 0;
-                string[] lines = File.ReadAllLines(this._resultFile);
-                File.Delete(this._resultFile);
+                string[] lines = File.ReadAllLines(this.resultFile);
+                File.Delete(this.resultFile);
                 Random rand = new Random();
 
                 int count = 0;
@@ -131,11 +132,18 @@ namespace PinCombain
                 {
                     var random = this._domains[rand.Next(0, _domains.Count)];
 
-                    var url = (random.Url.Contains("put/index/")) ? random.Url + line :
-                        random.Url + "put/index/" + line;
 
-
-
+                    string url = null;
+                    if (random.Url.Contains("index.php?action=put"))
+                    {
+                        url = random.Url + line.Replace("?c", "&c");
+                    }
+                    else
+                    {
+                         url = (random.Url.Contains("put/index/")) ? random.Url + line :
+                         random.Url + "put/index/" + line;
+                    }
+                    
 
                     HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                     request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
@@ -173,7 +181,7 @@ namespace PinCombain
 
         }
 
-        private string Base64Encode(string plainText)
+        public string Base64Encode(string plainText)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);

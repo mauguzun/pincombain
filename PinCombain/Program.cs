@@ -66,7 +66,10 @@ namespace PinCombain
                      DoLogin();
                     break;
 
-
+                case "extra":
+                    var extra = new ExtraGrab() { Driver = GetDriver(false) };
+                    extra.Start();
+                    break;
 
                 case "b":
                     MakeBoard();
@@ -94,16 +97,30 @@ namespace PinCombain
 
         }
 
+      
+
         private static void DoLogin()
         {
+
+            var accounts = new ReadXmlAccounts().GetXml(DIR);
             string proxy = RandomProxy();
+
+
+            foreach (var acc in accounts)
+            {
+                if (acc.Contains(LOGINED))
+                {
+                    File.Delete(acc);
+                    Console.WriteLine("deleted");
+                }
+            }
             do
             {
                 try
                 {
                     proxy = RandomProxy();
+                    //driver = GetDriver(true);
                     driver = GetDriver(true);
-                 //   driver = GetDriver(true, proxy);
                     driver.Url = "https://www.pinterest.com/login/";
                 }
                 catch { }
@@ -144,21 +161,43 @@ namespace PinCombain
 
         private static void MakePost()
         {
-            string proxy = RandomProxy();
-            driver = GetDriver(true, proxy);
-            var res = MakeLogin("denisuminja.k.rasiv.i.jp.enis@gmail.com", "1637trance");
-            if (res)
+
+            var accounts = new ReadXmlAccounts().GetXml(DIR);
+          string proxy = RandomProxy();
+
+
+            foreach (var acc in accounts)
             {
+                if (acc.Contains(LOGINED))
+                {
+                    currentAccount = acc;
+                    // proxy = acc.Replace(DIR, "").Replace("\\", "").Replace(LOGINED, "").Replace("__", ":").Replace("_", ".").Replace("xml", ".");
+                    break;
 
-              
+                }
+            }
+            driver = GetDriver(true);
+            // driver = GetDriver(false, proxy);
+            pinterestMethods.Driver = driver;
 
-              
+            MakeLogin(currentAccount);
+
+
+
+            if (CheckLogin())
+            {
                 PostPin post = new PostPin();
                 post.Driver = driver;
                 post.Start();
-               
+      
 
             }
+
+
+
+       
+               
+
 
         }
         private static string RandomProxy()
@@ -224,8 +263,7 @@ namespace PinCombain
         {
           
              var accounts = new ReadXmlAccounts().GetXml(DIR);
-           // string proxy = RandomProxy();
-
+       
 
             foreach (var acc in accounts)
             {
@@ -416,7 +454,7 @@ namespace PinCombain
 
 
 
-                driver = GetDriver(true);
+                driver = GetDriver(false);
                 pinterestMethods.Driver = driver;
 
                 driver.Url = "http://pinterest.com";

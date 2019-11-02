@@ -11,7 +11,7 @@ namespace PinCombain
     public class PostPin : IStart
     {
 
-        public string Url { get; set; } = "http://fairfield.nl.eu.org/get";
+        public string Url { get; set; } = "http://do.mdotransports.lv/get";
         public RemoteWebDriver Driver { get; set; }
 
         public PostPin()
