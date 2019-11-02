@@ -136,7 +136,7 @@ namespace PinCombain
                     Console.WriteLine($"saved {result.Count()}" + Environment.NewLine);
 
                     mk.PostResult();
-                    i++;
+                 
                 }
             }
         }

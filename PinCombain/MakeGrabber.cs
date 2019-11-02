@@ -134,10 +134,11 @@ namespace PinCombain
 
 
                     string url = null;
-                    if (random.Url.Contains("index.php?action=put"))
+                    if (random.Url.Contains("default.aspx"))
                     {
-                        url = random.Url + line.Replace("?c", "&c");
+                        url = random.Url + line;
                     }
+                  
                     else
                     {
                          url = (random.Url.Contains("put/index/")) ? random.Url + line :
