@@ -11,7 +11,7 @@ namespace PinCombain
 {
    public class ExtraGrab
     {
-
+        private const string saved = "saved.txt";
         private string _dbName = "my.sqlite";
 
         private int catNumber = 0;
@@ -91,10 +91,18 @@ namespace PinCombain
         {
             MakeGrabber mk = new MakeGrabber();
 
-
-            for (int i = 1; i < 2000; i++)
+            int i = 0;
+            if (File.Exists(saved))
             {
+                string data = File.ReadAllText(saved);
+                string [] values  = data.Split(',');
+                this.catNumber = Int32.Parse(values[0]);
+               i= Int32.Parse(values[1]);
+            }
 
+            for ( i = 1; i < 2000; i++)
+            {
+                File.WriteAllText(saved, this.catNumber + "," + i);
 
                 Driver.Url = this.categories[this.catNumber] + i;
                 List<string> result = new List<string>();
@@ -113,6 +121,7 @@ namespace PinCombain
                         string title = node.GetAttribute("title");
 
                         this.Insert(img,title, text);
+
 
                         string request = $"?c={mk.Base64Encode(text)}*{mk.Base64Encode(img.Replace("https://", ""))}";
 
