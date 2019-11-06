@@ -58,3 +58,8 @@ C:\my_work_files\PinCombain\PinCombain\bin\Debug\EntityFramework.xml
 C:\my_work_files\PinCombain\PinCombain\bin\Debug\EntityFramework.SqlServer.xml
 C:\my_work_files\PinCombain\PinCombain\bin\Debug\System.Data.SQLite.xml
 C:\my_work_files\PinCombain\PinCombain\bin\Debug\System.Data.SQLite.dll.config
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\Crc32C.NET.dll
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\SharpCompress.dll
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\Snappy.NET.dll
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\Crc32C.NET.xml
+C:\my_work_files\PinCombain\PinCombain\bin\Debug\Snappy.NET.xml

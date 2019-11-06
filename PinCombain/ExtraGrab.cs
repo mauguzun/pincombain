@@ -91,16 +91,16 @@ namespace PinCombain
         {
             MakeGrabber mk = new MakeGrabber();
 
-            int i = 0;
+            int y = 0;
             if (File.Exists(saved))
             {
                 string data = File.ReadAllText(saved);
                 string [] values  = data.Split(',');
                 this.catNumber = Int32.Parse(values[0]);
-               i= Int32.Parse(values[1]);
+              y= Int32.Parse(values[1]);
             }
 
-            for ( i = 1; i < 2000; i++)
+            for (int i =y; i < 2000; i++)
             {
                 File.WriteAllText(saved, this.catNumber + "," + i);
 
