@@ -27,6 +27,8 @@ namespace PinCombain
             categories.Add("http://repinned.net/pins/food-drink/");
             categories.Add("http://repinned.net/pins/");
             categories.Add("http://repinned.net/pins/health-fitness/");
+            categories.Add("http://repinned.net/pins/sports/");
+            categories.Add("http://repinned.net/pins/gardening/");
             Connection();
 
         }

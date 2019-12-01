@@ -4,10 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace PinCombain
@@ -39,7 +36,7 @@ namespace PinCombain
 
             if (answer == null)
             {
-                Console.WriteLine("r/rename  p/post  b/makeboard  l/showAccountIn   u/user g/grab  c/check  do/doling"   );
+                Console.WriteLine("n/new grabber  r/rename  p/post  b/makeboard  l/showAccountIn   u/user g/grab  c/MakeAccountList  do/doling");
                 answer = Console.ReadLine();
             }
             if (answer.Contains("|"))
@@ -53,9 +50,12 @@ namespace PinCombain
                 case "r":
                     Rename();
                     break;
+                case "n":
+                    NewGrab();
+                    break;
 
                 case "c":
-                    CheckAccount();
+                    MakeAccountList();
                     break;
 
                 case "l":
@@ -86,6 +86,9 @@ namespace PinCombain
                 case "u":
                     GrabUser();
                     break;
+
+
+                   
 
                 default:
                     Console.WriteLine("noting");
@@ -259,31 +262,65 @@ namespace PinCombain
             pinterestMethods.Driver = driver;
             pinterestMethods.GrabName();
         }
+
+        static void NewGrab()
+        {
+            var accounts = Directory.GetFiles("acc");
+
+
+            driver = GetDriver(false);
+            while (true)
+            {
+                for (int i = 0; i < accounts.Count(); i++)
+                {
+                    Console.WriteLine($"{i} + {accounts[i]}");
+                }
+                int result = 0;
+                Int32.TryParse(Console.ReadLine(), out result);
+                currentAccount = accounts[result];
+                MakeLogin(currentAccount);
+                Console.WriteLine($"logined {CheckLogin()}");
+                if (Console.ReadLine() == "y")
+                    break;
+            }
+
+            GrabberNewMethod grab = new GrabberNewMethod()
+            {
+                Driver = driver
+            };
+            grab.Start();
+
+            
+         
+        }
         static void GrabOrMakePost(bool grabPin = true)
         {
-          
-             var accounts = new ReadXmlAccounts().GetXml(DIR);
+
+            var accounts = Directory.GetFiles("acc");
        
 
-            foreach (var acc in accounts)
-            {
-                if (acc.Contains(LOGINED))
-                {
-                    currentAccount = acc;
-                   // proxy = acc.Replace(DIR, "").Replace("\\", "").Replace(LOGINED, "").Replace("__", ":").Replace("_", ".").Replace("xml", ".");
-                    break;
-
-                }
-            }
             driver = GetDriver(false);
-           // driver = GetDriver(false, proxy);
+            while(true)
+            {
+                for (int i = 0; i < accounts.Count(); i++)
+                {
+                    Console.WriteLine($"{i} + {accounts[i]}");
+                }
+                int result = 0;
+                Int32.TryParse(Console.ReadLine(), out result);
+                currentAccount = accounts[result];
+                MakeLogin(currentAccount);
+                Console.WriteLine($"logined {CheckLogin()}");
+                if (Console.ReadLine() == "y")
+                    break;
+            }
+          
+     
             pinterestMethods.Driver = driver;
 
-            MakeLogin(currentAccount);
 
 
-
-            if (CheckLogin())
+            if (grabPin)
             {
                 IStart gr;
                 if (grabPin)
@@ -387,18 +424,14 @@ namespace PinCombain
 
         static bool CheckLogin()
         {
-            if (driver.Manage().Cookies.GetCookieNamed("_auth").Value.ToString() == "1")
+            if (driver.FindElementsByCssSelector("#HeaderContent").Count() != 0)
             {
                 return true;
             }
-            else
-            {
-
-                return false;
-            }
+            return false;
         }
 
-        static public void CheckAccount()
+        static public void MakeAccountList()
         {
 
 

@@ -105,6 +105,7 @@
     <Compile Include="DCookie.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="ExtraGrab.cs" />
+    <Compile Include="GrabberNewMethod.cs" />
     <Compile Include="IStart.cs" />
     <Compile Include="PostAcc.cs" />
     <Compile Include="PostPin.cs" />
@@ -122,6 +123,81 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="acc\brauksimkopa+Britany80552422%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\brauksimkopa+Corliss20852498%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\brauksimkopa+Janessa80659961%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\brauksimkopa+Kiana110164051%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\brauksimkopa+Shela66017433%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\malmopiano+Gerda33783654%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\malmopiano+Ilse56350426%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\malmopiano+Irena65182704%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\malmopiano+Paris14276987%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\malmopiano+Phyliss25243600%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\malmopiano+Sibyl43079278%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\mauguzun+Bettye38186473%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\mauguzun+Bettye68435380%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\mauguzun+Christy87329695%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\mauguzun+Jill40844393%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\mauguzun+Lee1923814%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\mauguzun+Patricia70907127%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\pianosvergie+Belva21666319%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\pianosvergie+Mara36181584%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\pianosvergie+Maricela13253382%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\pianosvergie+Noel10177084%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\pianosvergie+Pearline49107623%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\pianosvergie+Rosalina43773722%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\pianosvergie+Rosalina49219297%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="acc\pianosvergie+Verda106780977%40gmail.com.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="city_names.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

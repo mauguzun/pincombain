@@ -12,14 +12,14 @@ namespace PinCombain
 {
     public class MakeGrabber:IStart
     {
-       
-        private List<Domain> _domains;
 
-        private string _url = "https://www.pinterest.com/";
-        private string _urlPopular = "https://www.pinterest.com/categories/popular/";
-        private int _attemp;
+        public List<Domain> _domains;
 
-        private string _domainFile = "domains.txt";
+        public string _url = "https://www.pinterest.com/";
+        public string _urlPopular = "https://www.pinterest.com/categories/popular/";
+        public int _attemp;
+
+        public string _domainFile = "domains.txt";
         public string resultFile = "result.txt";
 
 
@@ -66,9 +66,10 @@ namespace PinCombain
 
         }
 
-        private void DoGrab()
+        protected void DoGrab()
         {
             List<string> result = new List<string>();
+            Console.WriteLine(Driver.Url);
             try
             {
 
